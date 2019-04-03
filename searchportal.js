@@ -21,11 +21,16 @@ function apiKickOff(inputValue){
     var marvelCharacters = createMarvelString(baseURL,"characters?nameStartsWith=", inputValue, myApiKey);
 
     // Call events API and store the results in a var
-    fetch(marvelEvents).then((res) => {
-        console.log(res.json());
-    }).catch((err) => {
-        console.log(err.message);
-    });
+    fetch(marvelEvents)
+        .then((res) => {
+            return res.json()
+        })
+        .then(res => {
+            console.log(res)
+        })
+        .catch((err) => {
+            console.log(err);
+        });
 
     // Call comics API and store the results in a var
     // Call characters API and store the results in a var
