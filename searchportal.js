@@ -1,21 +1,3 @@
-var marvelCharacters = fetch(greatPower)
-.then(function(response){
-    console.log(response.json())
-})
-.catch(function (error) {
-    console.log(error.message);
-});
-
-var marvelEvents = "https://gateway.marvel.com/v1/public/events?";
-var marvelComics = "https://gateway.marvel.com/v1/public/comics?";
-var marvelCharacters = "https://gateway.marvel.com/v1/public/characters?nameStartsWith=";
-const myApiKey = "apikey=6d1f112aae8581fdaca4b89efca28a99";
-var searchArr = [];
-
-var greatPower = function greatResponsibility(){
-    return marvelEvents + searchinput + myApiKey
-}
-
 var form = document.getElementById('form')
 var searchInput = document.getElementById('inputTxt');
 
@@ -24,12 +6,27 @@ form.addEventListener('submit', function(e){
     apiKickOff(inputValue);
  }, false);
 
- function apiKickOff(inputValue){
-    console.log(inputValue);
-}
-
 let inputValue = '';
-
 searchInput.addEventListener('keyup', function(e){
     inputValue = e.target.value;
 }, false)
+
+const createMarvelString = (baseUrl, endpoint, inputValue, myApiKey) => baseUrl + endpoint + encodeURI(inputValue) + myApiKey
+const baseURL = "https://gateway.marvel.com/v1/public/"
+const myApiKey = "&apikey=6d1f112aae8581fdaca4b89efca28a99";
+
+function apiKickOff(inputValue){
+    var marvelEvents = createMarvelString(baseURL, "events?nameStartsWith=", inputValue, myApiKey);
+    var marvelComics = createMarvelString(baseURL, "comics?titleStartsWith=", inputValue, myApiKey);
+    var marvelCharacters = createMarvelString(baseURL,"characters?nameStartsWith=", inputValue, myApiKey);
+
+    // Call events API and store the results in a var
+    fetch(marvelEvents).then((res) => {
+        console.log(res.json());
+    }).catch((err) => {
+        console.log(err.message);
+    });
+
+    // Call comics API and store the results in a var
+    // Call characters API and store the results in a var
+}
