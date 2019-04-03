@@ -20,18 +20,43 @@ function apiKickOff(inputValue){
     var marvelComics = createMarvelString(baseURL, "comics?titleStartsWith=", inputValue, myApiKey);
     var marvelCharacters = createMarvelString(baseURL,"characters?nameStartsWith=", inputValue, myApiKey);
 
+
     // Call events API and store the results in a var
     fetch(marvelEvents)
         .then((res) => {
             return res.json()
         })
         .then(res => {
-            console.log(res)
+            let eventsResult = res.data.results;
+
         })
         .catch((err) => {
             console.log(err);
         });
 
-    // Call comics API and store the results in a var
-    // Call characters API and store the results in a var
+    fetch(marvelComics)
+        .then((res) => {
+            return res.json()
+        })
+        .then(res => {
+            let comicsResult = res.data.results;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+    fetch(marvelCharacters)
+        .then((res) => {
+            return res.json()
+        })
+        .then(res => {
+            let charactersResult = res.data.results;
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+
+    // Format the res data to be easily displayed
+
+    // Create DOM elements with the correct data
 }
