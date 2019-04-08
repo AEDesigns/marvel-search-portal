@@ -28,7 +28,9 @@ function apiKickOff(inputValue){
         })
         .then(res => {
             let eventsResult = res.data.results;
-
+            for(let i = 0; i < eventsResult.length; i++){
+                console.log(eventsResult[i].title);
+            }
         })
         .catch((err) => {
             console.log(err);
@@ -40,6 +42,9 @@ function apiKickOff(inputValue){
         })
         .then(res => {
             let comicsResult = res.data.results;
+            for(let i = 0; i < comicsResult.length; i++){
+                console.log(comicsResult[i].title);
+            }
         })
         .catch((err) => {
             console.log(err);
@@ -50,7 +55,10 @@ function apiKickOff(inputValue){
             return res.json()
         })
         .then(res => {
-            let charactersResult = res.data.results;
+            let characterResult = res.data.results;
+            for(let i = 0; i < characterResult.length; i++){
+                console.log(characterResult[i].name); 
+            }
         })
         .catch((err) => {
             console.log(err);
