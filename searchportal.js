@@ -28,9 +28,11 @@ function apiKickOff(inputValue){
         })
         .then(res => {
             let eventsResult = res.data.results;
+            let eventsArr = [];
             for(let i = 0; i < eventsResult.length; i++){
-                console.log(eventsResult[i].title);
+                eventsArr.push({"Title": eventsResult[i].title, "Description": eventsResult[i].description, "ID": eventsResult[i].id})
             }
+            console.log(eventsArr);
         })
         .catch((err) => {
             console.log(err);
@@ -42,9 +44,11 @@ function apiKickOff(inputValue){
         })
         .then(res => {
             let comicsResult = res.data.results;
+            let comicsArr = [];
             for(let i = 0; i < comicsResult.length; i++){
-                console.log(comicsResult[i].title);
+                comicsArr.push({"Title": comicsResult[i].title, "Description": comicsResult[i].description, "ID": comicsResult[i].id})
             }
+            console.log(comicsArr);
         })
         .catch((err) => {
             console.log(err);
@@ -56,9 +60,11 @@ function apiKickOff(inputValue){
         })
         .then(res => {
             let characterResult = res.data.results;
+            let characterArr = [];
             for(let i = 0; i < characterResult.length; i++){
-                console.log(characterResult[i].name); 
+                characterArr.push({"Name": characterResult[i].name, "Description": characterResult[i].description, "ID": characterResult[i].id})
             }
+            console.log(characterArr);
         })
         .catch((err) => {
             console.log(err);
