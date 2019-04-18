@@ -11,6 +11,73 @@ searchInput.addEventListener('keyup', function(e){
     inputValue = e.target.value;
 }, false)
 
+function addNewEventsElement(eventsArr){
+    var htmlDiv = document.createElement('div');
+    for(var i = 0; i < eventsArr.length; i++){
+        const currentArrayMemberTitle = eventsArr[i].title;
+        const currentArrayMemberDescription = eventsArr[i].description;
+        const currentArrayMemberId = eventsArr[i].id;
+
+        var eventsH4 = document.createElement('h4');
+        eventsH4.innerText = currentArrayMemberTitle;
+        htmlDiv.appendChild(eventsH4);
+
+        var eventsID = document.createElement('h5');
+        eventsID.innerText = "ID: " + currentArrayMemberId;
+        htmlDiv.appendChild(eventsID);
+
+        var eventsP = document.createElement('p');
+        eventsP.innerText = "Description: " + currentArrayMemberDescription;
+        htmlDiv.appendChild(eventsP);
+    }
+    return htmlDiv
+}
+
+function addNewComicsElement(comicsArr){
+    var htmlComicsDiv = document.createElement('div');
+    for(var i = 0; i < comicsArr.length; i++){
+        const currentArrayMemberTitle = comicsArr[i].title;
+        const currentArrayMemberDescription = comicsArr[i].description;
+        const currentArrayMemberId = comicsArr[i].id;
+
+        var comicsH4 = document.createElement('h4');
+        comicsH4.innerText = currentArrayMemberTitle;
+        htmlComicsDiv.appendChild(comicsH4);
+
+        var eventsID = document.createElement('h5');
+        eventsID.innerText = "ID: " + currentArrayMemberId;
+        htmlComicsDiv.appendChild(eventsID);
+
+        var eventsP = document.createElement('p');
+        eventsP.innerText = "Description: " + currentArrayMemberDescription;
+        htmlComicsDiv.appendChild(eventsP);
+    }
+    return htmlComicsDiv
+}
+
+function addNewCharactersElement(characterArr){
+    var htmlCharDiv = document.createElement('div');
+
+    for(var i = 0; i < characterArr.length; i++){
+        const currentArrayMemberTitle = characterArr[i].name;
+        const currentArrayMemberDescription = characterArr[i].description;
+        const currentArrayMemberId = characterArr[i].id;
+
+        var characterH4 = document.createElement('h4');
+        characterH4.innerText = currentArrayMemberTitle;
+        htmlCharDiv.appendChild(characterH4);
+
+        var charID = document.createElement('h5');
+        charID.innerText = "ID: " + currentArrayMemberId;
+        htmlCharDiv.appendChild(charID);
+
+        var charP = document.createElement('p');
+        charP.innerText = "Description: " + currentArrayMemberDescription;
+        htmlCharDiv.appendChild(charP);
+    }
+    return htmlCharDiv
+}
+
 const createMarvelString = (baseUrl, endpoint, inputValue, myApiKey) => baseUrl + endpoint + encodeURI(inputValue) + myApiKey
 const baseURL = "https://gateway.marvel.com/v1/public/"
 const myApiKey = "&apikey=6d1f112aae8581fdaca4b89efca28a99";
@@ -30,9 +97,9 @@ function apiKickOff(inputValue){
             let eventsResult = res.data.results;
             let eventsArr = [];
             for(let i = 0; i < eventsResult.length; i++){
-                eventsArr.push({"Title": eventsResult[i].title, "Description": eventsResult[i].description, "ID": eventsResult[i].id})
-            }
-            console.log(eventsArr);
+                eventsArr.push({title: eventsResult[i].title, description: eventsResult[i].description, id: eventsResult[i].id})
+                }
+                document.getElementById('movies').appendChild(addNewEventsElement(eventsArr));
         })
         .catch((err) => {
             console.log(err);
@@ -46,9 +113,9 @@ function apiKickOff(inputValue){
             let comicsResult = res.data.results;
             let comicsArr = [];
             for(let i = 0; i < comicsResult.length; i++){
-                comicsArr.push({"Title": comicsResult[i].title, "Description": comicsResult[i].description, "ID": comicsResult[i].id})
+                comicsArr.push({title: comicsResult[i].title, description: comicsResult[i].description, id: comicsResult[i].id})
             }
-            console.log(comicsArr);
+            document.getElementById('comics').appendChild(addNewComicsElement(comicsArr));
         })
         .catch((err) => {
             console.log(err);
@@ -62,9 +129,9 @@ function apiKickOff(inputValue){
             let characterResult = res.data.results;
             let characterArr = [];
             for(let i = 0; i < characterResult.length; i++){
-                characterArr.push({"Name": characterResult[i].name, "Description": characterResult[i].description, "ID": characterResult[i].id})
+                characterArr.push({name: characterResult[i].name, description: characterResult[i].description, id: characterResult[i].id})
             }
-            console.log(characterArr);
+            document.getElementById('characters').appendChild(addNewCharactersElement(characterArr));
         })
         .catch((err) => {
             console.log(err);
